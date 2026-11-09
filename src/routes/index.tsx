@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "해결경로 — 어디에 물어봐야 할지 모를 때" },
       {
         property: "og:description",
-        content: "게임·디지털 서비스 문제의 담당 기관과 해결 절차를 찾아드립니다.",
+        content: "12개 분야 실생활 문제의 공공기관 연락처와 해결 절차를 찾아드립니다.",
       },
     ],
   }),

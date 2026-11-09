@@ -11,11 +11,14 @@ export const Route = createFileRoute("/organizations")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { title: "기관 찾기 | 해결경로" },
-      { name: "description", content: "게임·소비자·개인정보 관련 담당 기관의 연락처와 접수 링크." },
+      {
+        name: "description",
+        content: "12개 분야 공공기관 및 정부부처의 검증된 연락처와 접수 창구 안내.",
+      },
       { property: "og:title", content: "기관 찾기 | 해결경로" },
       {
         property: "og:description",
-        content: "게임·소비자·개인정보 관련 담당 기관의 연락처와 접수 링크.",
+        content: "12개 분야 공공기관 및 정부부처의 검증된 연락처와 접수 창구 안내.",
       },
     ],
   }),
@@ -30,7 +33,9 @@ function Orgs() {
   return (
     <SiteLayout>
       <div className="mx-auto max-w-4xl px-4 py-8 md:py-12">
-        <h1 className="text-2xl font-bold md:text-3xl">기관 찾기</h1>
+        <h1 className="text-2xl font-bold md:text-3xl">
+          기관 찾기 ({organizations.length}개 기관)
+        </h1>
         <div className="mt-4 flex items-center gap-2 rounded-xl border bg-card px-3 shadow-card">
           <Search className="size-5 text-muted-foreground" />
           <input

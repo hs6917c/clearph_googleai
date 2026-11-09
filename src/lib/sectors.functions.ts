@@ -225,13 +225,36 @@ const SUB_SECTORS: Tables<"sectors">[] = SUB_SECTORS_DEF.map(([id, name, parent_
   updated_at: "2026-11-01T00:00:00Z",
 }));
 
-const FALLBACK_SECTORS: Tables<"sectors">[] = [...ROOT_SECTORS, ...SUB_SECTORS];
+export const FALLBACK_SECTORS: Tables<"sectors">[] = [...ROOT_SECTORS, ...SUB_SECTORS];
 
-const FALLBACK_LINKS: Tables<"problem_sectors">[] = [
+export const FALLBACK_LINKS: Tables<"problem_sectors">[] = [
+  // --- Game (Root & Subsectors) ---
   ...Array.from({ length: 20 }, (_, i) => ({
     problem_code: `G${String(i + 1).padStart(3, "0")}`,
     sector_id: "game",
   })),
+  { problem_code: "G001", sector_id: "game-platform" },
+  { problem_code: "G002", sector_id: "game-platform" },
+  { problem_code: "G003", sector_id: "game-payment" },
+  { problem_code: "G004", sector_id: "game-payment" },
+  { problem_code: "G005", sector_id: "game-account" },
+  { problem_code: "G006", sector_id: "game-account" },
+  { problem_code: "G007", sector_id: "game-items" },
+  { problem_code: "G008", sector_id: "game-items" },
+  { problem_code: "G009", sector_id: "game-items" },
+  { problem_code: "G010", sector_id: "game-items" },
+  { problem_code: "G011", sector_id: "game-payment" },
+  { problem_code: "G012", sector_id: "game-content" },
+  { problem_code: "G013", sector_id: "game-payment" },
+  { problem_code: "G014", sector_id: "game-payment" },
+  { problem_code: "G015", sector_id: "game-account" },
+  { problem_code: "G016", sector_id: "game-platform" },
+  { problem_code: "G017", sector_id: "game-content" },
+  { problem_code: "G018", sector_id: "game-content" },
+  { problem_code: "G019", sector_id: "game-platform" },
+  { problem_code: "G020", sector_id: "game-platform" },
+
+  // Game problems also relevant to Consumer
   { problem_code: "G003", sector_id: "consumer" },
   { problem_code: "G004", sector_id: "consumer" },
   { problem_code: "G011", sector_id: "consumer" },
@@ -240,6 +263,168 @@ const FALLBACK_LINKS: Tables<"problem_sectors">[] = [
   { problem_code: "G014", sector_id: "consumer" },
   { problem_code: "G019", sector_id: "consumer" },
   { problem_code: "G020", sector_id: "consumer" },
+
+  // --- Consumer (C001 ~ C005) ---
+  { problem_code: "C001", sector_id: "consumer" },
+  { problem_code: "C001", sector_id: "consumer-shopping" },
+  { problem_code: "C001", sector_id: "consumer-refund" },
+  { problem_code: "C002", sector_id: "consumer" },
+  { problem_code: "C002", sector_id: "consumer-shopping" },
+  { problem_code: "C002", sector_id: "consumer-defect" },
+  { problem_code: "C003", sector_id: "consumer" },
+  { problem_code: "C003", sector_id: "consumer-fraud" },
+  { problem_code: "C004", sector_id: "consumer" },
+  { problem_code: "C004", sector_id: "consumer-contract" },
+  { problem_code: "C004", sector_id: "consumer-refund" },
+  { problem_code: "C005", sector_id: "consumer" },
+  { problem_code: "C005", sector_id: "consumer-defect" },
+  { problem_code: "C005", sector_id: "consumer-contract" },
+
+  // --- Finance (F001 ~ F005) ---
+  { problem_code: "F001", sector_id: "finance" },
+  { problem_code: "F001", sector_id: "finance-fraud" },
+  { problem_code: "F001", sector_id: "finance-relief" },
+  { problem_code: "F002", sector_id: "finance" },
+  { problem_code: "F002", sector_id: "finance-insurance" },
+  { problem_code: "F003", sector_id: "finance" },
+  { problem_code: "F003", sector_id: "finance-loan" },
+  { problem_code: "F003", sector_id: "finance-relief" },
+  { problem_code: "F004", sector_id: "finance" },
+  { problem_code: "F004", sector_id: "finance-complaint" },
+  { problem_code: "F004", sector_id: "finance-relief" },
+  { problem_code: "F005", sector_id: "finance" },
+  { problem_code: "F005", sector_id: "finance-fraud" },
+  { problem_code: "F005", sector_id: "finance-complaint" },
+
+  // --- Tax (T001 ~ T005) ---
+  { problem_code: "T001", sector_id: "tax" },
+  { problem_code: "T001", sector_id: "tax-income" },
+  { problem_code: "T001", sector_id: "tax-pay" },
+  { problem_code: "T001", sector_id: "tax-refund" },
+  { problem_code: "T002", sector_id: "tax" },
+  { problem_code: "T002", sector_id: "tax-process" },
+  { problem_code: "T003", sector_id: "tax" },
+  { problem_code: "T003", sector_id: "tax-refund" },
+  { problem_code: "T004", sector_id: "tax" },
+  { problem_code: "T004", sector_id: "tax-pay" },
+  { problem_code: "T005", sector_id: "tax" },
+  { problem_code: "T005", sector_id: "tax-vat" },
+  { problem_code: "T005", sector_id: "tax-process" },
+
+  // --- Housing (H001 ~ H005) ---
+  { problem_code: "H001", sector_id: "housing" },
+  { problem_code: "H001", sector_id: "housing-deposit" },
+  { problem_code: "H001", sector_id: "housing-contract" },
+  { problem_code: "H002", sector_id: "housing" },
+  { problem_code: "H002", sector_id: "housing-repair" },
+  { problem_code: "H002", sector_id: "housing-dispute" },
+  { problem_code: "H003", sector_id: "housing" },
+  { problem_code: "H003", sector_id: "housing-contract" },
+  { problem_code: "H004", sector_id: "housing" },
+  { problem_code: "H004", sector_id: "housing-deposit" },
+  { problem_code: "H004", sector_id: "housing-support" },
+  { problem_code: "H005", sector_id: "housing" },
+  { problem_code: "H005", sector_id: "housing-dispute" },
+
+  // --- Labor (L001 ~ L005) ---
+  { problem_code: "L001", sector_id: "labor" },
+  { problem_code: "L001", sector_id: "labor-wage" },
+  { problem_code: "L002", sector_id: "labor" },
+  { problem_code: "L002", sector_id: "labor-contract" },
+  { problem_code: "L002", sector_id: "labor-dismissal" },
+  { problem_code: "L003", sector_id: "labor" },
+  { problem_code: "L003", sector_id: "labor-accident" },
+  { problem_code: "L004", sector_id: "labor" },
+  { problem_code: "L004", sector_id: "labor-contract" },
+  { problem_code: "L005", sector_id: "labor" },
+  { problem_code: "L005", sector_id: "labor-dismissal" },
+  { problem_code: "L005", sector_id: "labor-support" },
+
+  // --- Business (B001 ~ B005) ---
+  { problem_code: "B001", sector_id: "business" },
+  { problem_code: "B001", sector_id: "business-register" },
+  { problem_code: "B001", sector_id: "business-permit" },
+  { problem_code: "B002", sector_id: "business" },
+  { problem_code: "B002", sector_id: "business-startup" },
+  { problem_code: "B002", sector_id: "business-subsidy" },
+  { problem_code: "B003", sector_id: "business" },
+  { problem_code: "B003", sector_id: "business-management" },
+  { problem_code: "B004", sector_id: "business" },
+  { problem_code: "B004", sector_id: "business-management" },
+  { problem_code: "B005", sector_id: "business" },
+  { problem_code: "B005", sector_id: "business-subsidy" },
+
+  // --- Government (V001 ~ V005) ---
+  { problem_code: "V001", sector_id: "government" },
+  { problem_code: "V001", sector_id: "government-certificate" },
+  { problem_code: "V001", sector_id: "government-service" },
+  { problem_code: "V002", sector_id: "government" },
+  { problem_code: "V002", sector_id: "government-appeal" },
+  { problem_code: "V003", sector_id: "government" },
+  { problem_code: "V003", sector_id: "government-service" },
+  { problem_code: "V003", sector_id: "government-welfare" },
+  { problem_code: "V004", sector_id: "government" },
+  { problem_code: "V004", sector_id: "government-complaint" },
+  { problem_code: "V005", sector_id: "government" },
+  { problem_code: "V005", sector_id: "government-complaint" },
+
+  // --- Legal (J001 ~ J005) ---
+  { problem_code: "J001", sector_id: "legal" },
+  { problem_code: "J001", sector_id: "legal-process" },
+  { problem_code: "J001", sector_id: "legal-contract" },
+  { problem_code: "J002", sector_id: "legal" },
+  { problem_code: "J002", sector_id: "legal-consult" },
+  { problem_code: "J002", sector_id: "legal-relief" },
+  { problem_code: "J003", sector_id: "legal" },
+  { problem_code: "J003", sector_id: "legal-process" },
+  { problem_code: "J004", sector_id: "legal" },
+  { problem_code: "J004", sector_id: "legal-mediate" },
+  { problem_code: "J005", sector_id: "legal" },
+  { problem_code: "J005", sector_id: "legal-relief" },
+
+  // --- Education (E001 ~ E005) ---
+  { problem_code: "E001", sector_id: "education" },
+  { problem_code: "E001", sector_id: "education-scholarship" },
+  { problem_code: "E001", sector_id: "education-support" },
+  { problem_code: "E002", sector_id: "education" },
+  { problem_code: "E002", sector_id: "education-exam" },
+  { problem_code: "E002", sector_id: "education-certificate" },
+  { problem_code: "E003", sector_id: "education" },
+  { problem_code: "E003", sector_id: "education-support" },
+  { problem_code: "E004", sector_id: "education" },
+  { problem_code: "E004", sector_id: "education-dispute" },
+  { problem_code: "E005", sector_id: "education" },
+  { problem_code: "E005", sector_id: "education-support" },
+
+  // --- Safety (S001 ~ S005) ---
+  { problem_code: "S001", sector_id: "safety" },
+  { problem_code: "S001", sector_id: "safety-report" },
+  { problem_code: "S001", sector_id: "safety-facility" },
+  { problem_code: "S002", sector_id: "safety" },
+  { problem_code: "S002", sector_id: "safety-environment" },
+  { problem_code: "S003", sector_id: "safety" },
+  { problem_code: "S003", sector_id: "safety-report" },
+  { problem_code: "S003", sector_id: "safety-health" },
+  { problem_code: "S004", sector_id: "safety" },
+  { problem_code: "S004", sector_id: "safety-facility" },
+  { problem_code: "S004", sector_id: "safety-relief" },
+  { problem_code: "S005", sector_id: "safety" },
+  { problem_code: "S005", sector_id: "safety-health" },
+
+  // --- Participation (P001 ~ P005) ---
+  { problem_code: "P001", sector_id: "participation" },
+  { problem_code: "P001", sector_id: "participation-petition" },
+  { problem_code: "P002", sector_id: "participation" },
+  { problem_code: "P002", sector_id: "participation-policy" },
+  { problem_code: "P002", sector_id: "participation-hearing" },
+  { problem_code: "P002", sector_id: "participation-improve" },
+  { problem_code: "P003", sector_id: "participation" },
+  { problem_code: "P003", sector_id: "participation-assembly" },
+  { problem_code: "P004", sector_id: "participation" },
+  { problem_code: "P004", sector_id: "participation-hearing" },
+  { problem_code: "P004", sector_id: "participation-improve" },
+  { problem_code: "P005", sector_id: "participation" },
+  { problem_code: "P005", sector_id: "participation-petition" },
 ];
 
 export const getSectorCatalog = createServerFn({ method: "GET" }).handler(async () => {
@@ -265,11 +450,28 @@ export const getSectorCatalog = createServerFn({ method: "GET" }).handler(async 
       client.from("sectors").select("*").order("display_order").range(0, 999),
       client.from("problem_sectors").select("problem_code, sector_id").range(0, 999),
     ]);
-    if (sectors.error || links.error || !sectors.data || !links.data) {
-      console.warn("[sectors] Error loading from Supabase, falling back to local catalog");
-      return { sectors: FALLBACK_SECTORS, links: FALLBACK_LINKS };
+    // Merge database data with local verified catalog so newly registered problems and sectors
+    // are always fully available even if the remote database only has initial migration seed data.
+    const sectorMap = new Map<string, Tables<"sectors">>();
+    for (const s of FALLBACK_SECTORS) {
+      sectorMap.set(s.id, s);
     }
-    return { sectors: sectors.data, links: links.data };
+    for (const s of sectors.data ?? []) {
+      sectorMap.set(s.id, s);
+    }
+
+    const linkMap = new Map<string, Tables<"problem_sectors">>();
+    for (const l of FALLBACK_LINKS) {
+      linkMap.set(`${l.problem_code}:${l.sector_id}`, l);
+    }
+    for (const l of links.data ?? []) {
+      linkMap.set(`${l.problem_code}:${l.sector_id}`, l);
+    }
+
+    return {
+      sectors: Array.from(sectorMap.values()),
+      links: Array.from(linkMap.values()),
+    };
   } catch (err) {
     console.warn("[sectors] Exception connecting to Supabase, falling back to local catalog", err);
     return { sectors: FALLBACK_SECTORS, links: FALLBACK_LINKS };

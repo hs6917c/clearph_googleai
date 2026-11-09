@@ -15,6 +15,19 @@ export function OrgCard({ org, tag }: { org: Organization; tag?: string }) {
         <StatusBadge status={org.status} />
       </div>
       <p className="mt-2 text-sm text-muted-foreground">{org.scope}</p>
+      {org.methods && org.methods.length > 0 && (
+        <div className="mt-3 flex flex-wrap items-center gap-1.5">
+          <span className="text-xs font-semibold text-muted-foreground">문의방법:</span>
+          {org.methods.map((method, idx) => (
+            <span
+              key={idx}
+              className="inline-flex items-center rounded bg-secondary px-2 py-0.5 text-xs font-medium text-secondary-foreground"
+            >
+              {method}
+            </span>
+          ))}
+        </div>
+      )}
       <div className="mt-4 grid gap-2 sm:grid-cols-2">
         {org.phone ? (
           <a

@@ -13,9 +13,9 @@ export const Route = createFileRoute("/problems/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { title: "문제 유형별 안내 | 해결경로" },
-      { name: "description", content: "게임 및 디지털 서비스 문제 20가지의 해결 경로." },
+      { name: "description", content: "12개 분야 실생활 문제와 분쟁의 검증된 해결 경로." },
       { property: "og:title", content: "문제 유형별 안내 | 해결경로" },
-      { property: "og:description", content: "게임 및 디지털 서비스 문제 20가지의 해결 경로." },
+      { property: "og:description", content: "12개 분야 실생활 문제와 분쟁의 검증된 해결 경로." },
     ],
   }),
   component: ProblemsPage,
@@ -30,7 +30,7 @@ function ProblemsPage() {
       <div className="mx-auto max-w-6xl px-4 py-8 md:py-12">
         <h1 className="text-2xl font-bold md:text-3xl">문제 유형별 안내</h1>
         <p className="mt-1 text-muted-foreground">
-          게임 및 디지털 서비스 관련 문제 {problems.length}가지
+          분야별 실생활 민원 및 분쟁 해결 안내 ({problems.length}건 등록)
         </p>
         <div className="-mx-4 mt-6 flex gap-2 overflow-x-auto px-4 pb-2">
           <Link

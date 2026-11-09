@@ -1,40 +1,34 @@
-# Clearph
+# Clearph (해결경로)
 
-현재 구현된 해결경로 웹사이트의 UX/UI를 개선하라.
+> 어디에 물어봐야 할지 모를 때, 검색 한 번으로 문제 상황에 맞는 공공기관·담당 부서와 단계별 해결 절차를 찾아드립니다.
 
-사용자가 첫 화면에서 3초 이내에 서비스 목적을 이해할 수 있도록 한다.
+Clearph(해결경로)는 일상생활과 디지털 환경에서 발생하는 다양한 분쟁·피해에 대해 **검증된 공식 소관 기관, 대표 직통 연락처, 단계별 해결 절차(STEP), 필수 증빙자료, 맞춤형 문의문 초안**을 원스톱으로 제공하는 신뢰 기반의 해결 경로 안내 웹 서비스입니다.
 
-검색창을 가장 중요한 요소로 배치한다.
+---
 
-문제 유형별 카드 디자인을 직관적으로 개선한다.
+## 🌐 주요 웹페이지 바로가기
 
-문제 상세 페이지는 담당 기관, 연락처, 해결 절차가 명확하게 구분되도록 한다.
+- **[홈 (어떤 문제를 해결하고 싶으신가요?)](/)** — 자연어 키워드 검색 및 자주 찾는 문제 모아보기
+- **[분야별 탐색](/sectors)** — 12개 주요 분야(주거·부동산, 소비자·거래, 금융·보험, 노동·고용 등) 및 60개 세부 분류별 등록 문제 찾기
+- **[문제 유형별 안내](/problems)** — 결제·환불, 계정, 불공정, 연락처, 서비스, 사기 등 유형별 문제 탐색
+- **[기관 찾기](/organizations)** — 30여 개 정부부처·공공기관의 검증된 직통번호, 운영시간, 온라인 접수 창구
+- **[문제 해결 검색](/solve)** — 겪고 있는 구체적인 피해 상황을 직접 입력하여 해결경로 추천받기
+- **[서비스 소개](/about)** — 서비스 취지와 정보 검증 기준 안내
 
-모바일 화면에서 검색과 문의문 복사가 편리하도록 한다.
+---
 
-공공서비스의 신뢰성과 SaaS의 사용 편의성을 동시에 확보한다.
-
-기존 기능을 제거하지 말고 실제 작동 여부를 확인하면서 디자인을 개선하라.
-
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://clearph.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/9db05284-bd73-45da-97a6-0893dd218176).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## 🚀 로컬 개발 환경 실행
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+# 의존성 패키지 설치
+npm install
+
+# 개발 서버 실행 (기본 포트: 3000)
 npm run dev
+
+# 단위 테스트 실행
+npm test
+
+# 빌드
+npm run build
 ```

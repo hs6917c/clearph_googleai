@@ -164,8 +164,15 @@ function Detail() {
                   <span className="absolute -left-[35px] grid size-6 place-items-center rounded-full border-2 border-accent bg-card text-xs font-bold text-accent">
                     {i + 1}
                   </span>
-                  <p className="text-xs font-semibold text-accent">STEP {i + 1}</p>
-                  <p className="font-semibold">{s.title}</p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="text-xs font-semibold text-accent">STEP {i + 1}</p>
+                    {s.method && (
+                      <span className="rounded bg-accent/10 px-2 py-0.5 text-[11px] font-semibold text-accent">
+                        {s.method}
+                      </span>
+                    )}
+                  </div>
+                  <p className="mt-0.5 font-semibold">{s.title}</p>
                   <p className="mt-1 text-sm text-muted-foreground">{s.detail}</p>
                   {org && (
                     <a
@@ -259,7 +266,7 @@ function InquiryWriter() {
         </div>
         <input
           className={field}
-          placeholder="게임명"
+          placeholder={p.code.startsWith("G") ? "게임명" : "대상 (회사명·기관명·서비스명)"}
           value={form.game}
           onChange={(e) => setForm({ ...form, game: e.target.value })}
         />

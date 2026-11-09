@@ -29,7 +29,11 @@ function SectorDetail() {
   const sector = Route.useLoaderData();
   const { data } = useSuspenseQuery(sectorQuery);
   const [q, setQ] = useState("");
-  const codes = new Set(codesForSector(data, sector.id));
+  const [selectedSub, setSelectedSub] = useState<string | null>(null);
+
+  const subsectors = data.sectors.filter((s) => s.parent_id === sector.id);
+  const activeSectorId = selectedSub ?? sector.id;
+  const codes = new Set(codesForSector(data, activeSectorId));
   const list = (q.trim() ? searchProblems(q) : problems).filter((p) => codes.has(p.code));
   const orgIds = new Set(
     problems.filter((p) => codes.has(p.code)).flatMap((p) => [...p.primary, ...p.secondary]),
@@ -42,15 +46,38 @@ function SectorDetail() {
         </Link>
         <h1 className="mt-4 text-3xl font-bold">{sector.name}</h1>
         <p className="mt-2 text-muted-foreground">{sector.description}</p>
-        <div className="mt-6 flex flex-wrap gap-2">
-          {data.sectors
-            .filter((s) => s.parent_id === sector.id)
-            .map((s) => (
-              <span key={s.id} className="rounded-md bg-secondary px-3 py-2 text-sm">
-                {s.name}
-              </span>
-            ))}
-        </div>
+        {subsectors.length > 0 && (
+          <div className="mt-6 flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => setSelectedSub(null)}
+              className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition cursor-pointer ${
+                selectedSub === null
+                  ? "bg-primary text-primary-foreground font-semibold"
+                  : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+              }`}
+            >
+              전체 ({codesForSector(data, sector.id).length})
+            </button>
+            {subsectors.map((s) => {
+              const count = codesForSector(data, s.id).length;
+              return (
+                <button
+                  type="button"
+                  key={s.id}
+                  onClick={() => setSelectedSub(s.id === selectedSub ? null : s.id)}
+                  className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition cursor-pointer ${
+                    selectedSub === s.id
+                      ? "bg-primary text-primary-foreground font-semibold"
+                      : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                  }`}
+                >
+                  {s.name} ({count})
+                </button>
+              );
+            })}
+          </div>
+        )}
         <label className="mt-8 block text-sm font-semibold" htmlFor="sector-search">
           이 분야의 문제 검색
         </label>
