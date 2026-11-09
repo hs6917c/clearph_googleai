@@ -1,0 +1,6 @@
+{
+  "name": "Clearph",
+  "description": "해결경로 - 공공서비스 및 생활 문제 해결 경로 안내 플랫폼",
+  "permissions": [],
+  "capabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
