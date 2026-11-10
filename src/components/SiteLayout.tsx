@@ -58,15 +58,40 @@ export function SiteLayout({ children }: { children: ReactNode }) {
       <main className="flex-1">{children}</main>
       <footer className="border-t bg-card">
         <div className="mx-auto max-w-6xl px-4 py-8 text-xs leading-relaxed text-muted-foreground">
-          <p className="font-semibold text-foreground">해결경로</p>
-          <p className="mt-1">
-            본 서비스는 정보 안내 및 절차 지원 서비스이며, 법률 상담이나 법적 판단을 제공하지
-            않습니다.
-          </p>
-          <p>
-            기관 정보는 공식 출처를 기준으로 하며, '확인 필요' 표시 정보는 이용 전 공식 홈페이지에서
-            다시 확인해 주세요.
-          </p>
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b pb-6">
+            <div>
+              <p className="text-sm font-semibold text-foreground">Clearph (해결경로)</p>
+              <p className="mt-1">
+                어디에 물어봐야 할지 모를 때, 검색 한 번으로 공공서비스 및 생활 분쟁 해결 경로를
+                찾아드립니다.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-4 text-xs">
+              <Link to="/about" className="hover:text-foreground hover:underline">
+                서비스 소개
+              </Link>
+              <Link to="/terms" className="font-medium text-foreground hover:underline">
+                이용약관
+              </Link>
+              <Link to="/privacy" className="font-medium text-foreground hover:underline">
+                개인정보처리방침
+              </Link>
+              <Link to="/organizations" className="hover:text-foreground hover:underline">
+                기관 찾기
+              </Link>
+            </div>
+          </div>
+          <div className="space-y-1 pt-6">
+            <p>
+              본 서비스는 정보 안내 및 절차 지원 목적의 공공 정보 큐레이션 서비스이며, 변호사법에
+              따른 법률 상담이나 법적 판단을 제공하지 않습니다.
+            </p>
+            <p>
+              등재된 기관 정보 및 절차는 정부 공공기관 공식 출처를 기준으로 검증되었으나, 실제 민원
+              신청 전 해당 기관의 최신 지침을 재확인하시기 바랍니다.
+            </p>
+            <p className="pt-2 text-[11px] opacity-75">© 2026 Clearph. All rights reserved.</p>
+          </div>
         </div>
       </footer>
     </div>
