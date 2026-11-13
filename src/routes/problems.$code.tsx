@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { ChevronLeft, Copy, Check, RotateCcw, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import { SiteLayout } from "@/components/SiteLayout";
@@ -7,22 +7,56 @@ import { OrgCard } from "@/components/OrgCard";
 import { buildInquiry, getOrg, getProblem, type DocType } from "@/data/catalog";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { sectorQuery } from "@/lib/sectors";
+import { PremiumPartnerCard } from "@/components/PremiumPartnerCard";
+import { getMatchingPartners } from "@/data/partners";
+import { getLivePublicPartnersFn } from "@/lib/partners.functions";
 
 export const Route = createFileRoute("/problems/$code")({
-  loader: async ({ params, context }) => {
+  validateSearch: (s: Record<string, unknown>): { preview_partner?: string } => {
+    const val = s["preview_partner"];
+    if (val === "1" || val === 1 || val === true || val === "true") {
+      return { preview_partner: "1" };
+    }
+    if (typeof val === "string" && val.trim().length > 0) {
+      return { preview_partner: val.trim() };
+    }
+    return {};
+  },
+  loaderDeps: ({ search }): { preview_partner?: string } =>
+    search.preview_partner ? { preview_partner: search.preview_partner } : {},
+  loader: async ({ params, context, deps }) => {
     const p = getProblem(params.code);
     if (!p) throw notFound();
-    await context.queryClient.ensureQueryData(sectorQuery);
-    return p;
+    const sectorCatalog = await context.queryClient.ensureQueryData(sectorQuery);
+    const sectorIds = sectorCatalog.links
+      .filter((l) => l.problem_code === p.code)
+      .map((l) => l.sector_id);
+    const forcePreview = deps.preview_partner === "1";
+    const previewPartnerId =
+      deps.preview_partner && deps.preview_partner !== "1" ? deps.preview_partner : undefined;
+    const matchOpts = {
+      problemCode: p.code,
+      category: p.category,
+      sectorIds,
+      forcePreview,
+      ...(previewPartnerId ? { previewPartnerId } : {}),
+    };
+    const matchingPartners = await getLivePublicPartnersFn({
+      data: matchOpts,
+    }).catch(() => getMatchingPartners(matchOpts));
+    return { problem: p, matchingPartners };
   },
   head: ({ loaderData }) => ({
     meta: [
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { title: `${loaderData?.title ?? "문제"} 해결 방법 | 해결경로` },
-      { name: "description", content: loaderData?.summary ?? "" },
-      { property: "og:title", content: `${loaderData?.title ?? "문제"} 해결 방법 | 해결경로` },
-      { property: "og:description", content: loaderData?.summary ?? "" },
+      { title: `${loaderData?.problem.title ?? "문제"} 해결 방법 | 해결경로` },
+      { name: "description", content: loaderData?.problem.summary ?? "" },
+      {
+        property: "og:title",
+        content: `${loaderData?.problem.title ?? "문제"} 해결 방법 | 해결경로`,
+      },
+      { property: "og:description", content: loaderData?.problem.summary ?? "" },
     ],
   }),
   notFoundComponent: () => (
@@ -70,10 +104,14 @@ function Section({
 }
 
 function Detail() {
-  const p = Route.useLoaderData();
+  const { problem: p, matchingPartners } = Route.useLoaderData();
+  const search = Route.useSearch();
+  const hasPreviewQuery = Boolean(search.preview_partner);
   const { data: sectorCatalog } = useSuspenseQuery(sectorQuery);
-  const relatedIds = new Set(
-    sectorCatalog.links.filter((l) => l.problem_code === p.code).map((l) => l.sector_id),
+  const relatedIds = useMemo(
+    () =>
+      new Set(sectorCatalog.links.filter((l) => l.problem_code === p.code).map((l) => l.sector_id)),
+    [sectorCatalog.links, p.code],
   );
   const primary = p.primary.map(getOrg).filter(Boolean);
   const secondary = p.secondary.map(getOrg).filter(Boolean);
@@ -140,6 +178,17 @@ function Detail() {
 
       <div className="mx-auto max-w-4xl space-y-12 px-4 py-8 pb-28 md:pb-12">
         <Section id="orgs" n={1} title="담당 기관 및 연락처">
+          {matchingPartners.length > 0 && (
+            <div className="mb-6 space-y-4">
+              {matchingPartners.map((partner) => (
+                <PremiumPartnerCard
+                  key={partner.id}
+                  partner={partner}
+                  isPreview={hasPreviewQuery && !partner.enabled}
+                />
+              ))}
+            </div>
+          )}
           {primary.length === 0 && secondary.length === 0 && (
             <p className="rounded-xl border bg-card p-4 text-sm">
               현재 등록된 공식 정보가 없습니다. 먼저 해당 사업자 고객센터에 문의하세요.
@@ -224,7 +273,7 @@ function Detail() {
 }
 
 function InquiryWriter() {
-  const p = Route.useLoaderData();
+  const { problem: p } = Route.useLoaderData();
   const [ready, setReady] = useState(false);
   useEffect(() => setReady(true), []);
   const [type, setType] = useState<DocType>("고객센터 문의문");

@@ -1,0 +1,86 @@
+[
+  {
+    "id": "partner-law-jeonse",
+    "name": "로톡 전세피해 전담센터",
+    "tag": "Sponsored",
+    "enabled": false,
+    "title": "보증금 미반환·전세사기, 전문 변호사 15분 긴급 전화상담",
+    "description": "공공조정 대기시간이 길거나 내용증명·지급명령 등 신속한 법적 조치가 필요할 때, 전세사기·임대차 분쟁 전문 변호사에게 1:1로 해결 전략을 진단받으세요.",
+    "highlightPoints": [
+      "내용증명 작성 및 임차권등기명령 절차 1:1 가이드",
+      "보증금 반환 소송 착수 전 승소 가능성 및 실익 사전진단",
+      "야간·주말 비대면 전화 상담 지원"
+    ],
+    "ctaText": "전문 변호사 상담 신청",
+    "linkUrl": "https://www.lawtalk.co.kr",
+    "targetProblemCodes": [
+      "H001",
+      "H004"
+    ],
+    "targetSectors": [
+      "housing"
+    ],
+    "priority": 10
+  },
+  {
+    "id": "partner-tax-refund",
+    "name": "택스리펀드 세무센터",
+    "tag": "프리미엄",
+    "enabled": false,
+    "title": "종합소득세·연말정산 놓친 환급금 5개년 치 원스톱 경정청구",
+    "description": "복잡한 홈택스 세무 서식 작성 없이, 최근 5년간 과오납된 세금을 간편 인증 한 번으로 전문 세무사가 전액 검토하여 국세청 환급을 대행합니다.",
+    "highlightPoints": [
+      "최근 5개년 세금 누락분 무료 진단",
+      "환급 성공 시에만 수수료 발생하는 안심 후불제"
+    ],
+    "ctaText": "예상 환급액 무료 조회",
+    "linkUrl": "https://www.hometax.go.kr",
+    "targetProblemCodes": [
+      "T001",
+      "T003"
+    ],
+    "targetSectors": [
+      "tax"
+    ],
+    "priority": 10
+  },
+  {
+    "id": "partner-labor-care",
+    "name": "노무법인 권익지원센터",
+    "tag": "공식 파트너",
+    "enabled": false,
+    "title": "임금체불·부당해고, 공인노무사 무료 초기 진단 및 진정 대행",
+    "description": "퇴직금·주휴수당 미지급이나 부당해고 구제신청 시, 노동청 진정서 및 대지급금 청구 절차를 전담 공인노무사와 함께 신속하게 준비할 수 있습니다.",
+    "highlightPoints": [
+      "체불임금 산정 및 간이대지급금 수령 가능 여부 진단",
+      "부당해고 구제신청(3개월 제척기간) 긴급 대응"
+    ],
+    "ctaText": "공인노무사 상담 예약",
+    "linkUrl": "https://www.moel.go.kr",
+    "targetProblemCodes": [
+      "L001",
+      "L002"
+    ],
+    "targetSectors": [
+      "labor"
+    ],
+    "priority": 10
+  },
+  {
+    "id": "partner-fitness-dispute",
+    "name": "소비자안심 피트니스",
+    "tag": "Sponsored",
+    "enabled": false,
+    "title": "헬스장·PT 위약금 과다청구 분쟁 전담 협의 지원",
+    "description": "체육시설 표준약관보다 과도한 위약금을 청구받았을 때, 카드사 할부 철회 및 위약금 반환 공문을 전문 지원팀과 함께 발송하세요.",
+    "ctaText": "위약금 계산기 및 상담",
+    "linkUrl": "https://www.ccn.go.kr",
+    "targetProblemCodes": [
+      "C004"
+    ],
+    "targetSectors": [
+      "consumer"
+    ],
+    "priority": 10
+  }
+]
